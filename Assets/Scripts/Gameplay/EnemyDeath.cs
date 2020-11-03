@@ -15,8 +15,7 @@ namespace Platformer.Gameplay
         {
             enemy._collider.enabled = false;
             enemy.control.enabled = false;
-            if (enemy._audio && enemy.ouch)
-                enemy._audio.PlayOneShot(enemy.ouch);
+            AudioManager.PlayRandomSound(AudioManager.eSound.CharacterLandOnEnemy);
         }
     }
 }

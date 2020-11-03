@@ -14,9 +14,7 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
-        public AudioClip jumpAudio;
-        public AudioClip respawnAudio;
-        public AudioClip ouchAudio;
+        public static PlayerController playerInstance;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -49,6 +47,9 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            playerInstance = this;
+
+            
         }
 
         protected override void Update()

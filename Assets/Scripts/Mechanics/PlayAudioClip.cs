@@ -20,15 +20,25 @@ public class PlayAudioClip : StateMachineBehaviour
     /// <summary>
     /// The audio clip to be played.
     /// </summary>
-    public AudioClip clip;
-    float last_t = -1f;
+    public AudioManager.eSound sound;
+    float last_t = 0f;
+    float soundTime;
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        last_t = stateInfo.normalizedTime;
+        soundTime = 0f;
+    }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var nt = stateInfo.normalizedTime;
-        if (modulus > 0f) nt %= modulus;
-        if (nt >= t && last_t < t)
-            AudioSource.PlayClipAtPoint(clip, animator.transform.position);
-        last_t = nt;
+        soundTime += stateInfo.normalizedTime - last_t;
+        if (soundTime / modulus > t)
+        {
+            soundTime -= 1f;
+            AudioManager.PlayRandomSound(sound);
+        }
+
+        last_t = stateInfo.normalizedTime;
     }
 }
