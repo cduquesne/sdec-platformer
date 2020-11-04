@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BackgroundLoopPlayer : MonoBehaviour
 {
-    AudioClip[] backgroundClips;
-    string folder = "background_loops";
+    public UnityEngine.Audio.AudioMixerGroup mixerGroup = null;
     // Start is called before the first frame update
     void Start()
     {
